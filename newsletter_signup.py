@@ -1,5 +1,8 @@
+import os
+
 import requests
 
+SHEETY_ENDPOINT = os.environ.get("SHEETY_USERS")
 
 def post_new_row(first_name, last_name, email):
     body = {
@@ -10,14 +13,7 @@ def post_new_row(first_name, last_name, email):
       }
     }
 
-    endpoint = "https://api.sheety.co/4b87752b9313263cb33c7112ef4e3883/flightDeals/users"
-
-    headers = {
-      "Authorization": "Basic bnVsbDpudWxs",
-      "Content-Type": "application/json"
-    }
-
-    response = requests.post(endpoint, json=body, headers=headers)
+    response = requests.post(SHEETY_ENDPOINT, json=body)
     response.raise_for_status()
     print(response.text)
 
